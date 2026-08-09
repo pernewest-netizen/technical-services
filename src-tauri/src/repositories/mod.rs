@@ -1,0 +1,19 @@
+pub mod user_repository;
+pub mod template_repository;
+pub mod season_repository;
+pub mod product_repository;
+pub mod category_repository;
+pub mod service_repository;
+pub mod machine_repository;
+pub mod production_guide_repository;
+pub mod favorites_repository;
+
+pub use user_repository::*;
+pub use template_repository::*;
+pub use season_repository::*;
+pub use product_repository::*;
+pub use category_repository::*;
+pub use service_repository::*;
+pub use machine_repository::*;
+pub use production_guide_repository::*;
+pub use favorites_repository::*;

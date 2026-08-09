@@ -1,0 +1,16 @@
+export { LoginPage } from './LoginPage';
+export { DashboardPage } from './DashboardPage';
+export { SeasonsPage } from './SeasonsPage';
+export { ProductsPage } from './ProductsPage';
+export { ServicesPage } from './ServicesPage';
+export { TemplatesPage } from './TemplatesPage';
+export { TemplateDetailPage } from './TemplateDetailPage';
+export { MachinesPage } from './MachinesPage';
+export { MaterialsPage } from './MaterialsPage';
+export { ProductionGuidesPage } from './ProductionGuidesPage';
+export { FavoritesPage } from './FavoritesPage';
+export { UsersPage } from './UsersPage';
+export { SettingsPage } from './SettingsPage';
+export { BackupPage } from './BackupPage';
+export { FileManagerPage } from './FileManagerPage';
+export { NotFoundPage } from './NotFoundPage';
