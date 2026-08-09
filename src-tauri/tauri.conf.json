@@ -6,9 +6,16 @@
     "distDir": "../dist",
     "withGlobalTauri": false
   },
+
+  "package": {
+    "productName": "المعاونة الفنية",
+    "version": "1.0.0"
+  },
+
   "tauri": {
     "allowlist": {
       "all": false,
+
       "fs": {
         "all": true,
         "readFile": true,
@@ -23,18 +30,21 @@
         "scope": [
           "$APPLOCALDATA/**",
           "$DESKTOP/**",
-          "D:/**",
-          "C:/**"
+          "C:/**",
+          "D:/**"
         ]
       },
+
       "path": {
         "all": true
       },
+
       "dialog": {
         "all": true,
         "open": true,
         "save": true
       },
+
       "shell": {
         "all": false,
         "open": true,
@@ -51,87 +61,100 @@
           }
         ]
       },
+
       "os": {
         "all": true
       },
+
       "process": {
         "relaunch": true
       }
-    }
-  },
-  "bundle": {
-    "active": true,
-    "category": "Productivity",
-    "copyright": "Technical Services",
-    "deb": {
-      "depends": []
     },
-    "externalBin": [],
-    "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.ico"
-    ],
-    "identifier": "com.technicalservices.app",
-    "longDescription": "Technical Services - Design & Production Management System",
-    "macOS": {
-      "entitlements": null,
-      "exceptionDomain": "",
-      "frameworks": [],
-      "providerShortName": null,
-      "signingIdentity": null
-    },
-    "resources": [],
-    "shortDescription": "Technical Services",
-    "targets": [
-      "nsis",
-      "msi"
-    ],
-    "windows": {
-      "certificateThumbprint": null,
-      "digestAlgorithm": "sha256",
-      "timestampUrl": "",
-      "webviewInstallMode": {
-        "type": "offlineInstaller",
-        "silent": true
+
+    "bundle": {
+      "active": true,
+      "category": "Productivity",
+      "copyright": "Technical Services",
+
+      "identifier": "com.technicalservices.app",
+
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.ico"
+      ],
+
+      "longDescription": "Technical Services - Design & Production Management System",
+      "shortDescription": "Technical Services",
+      "publisher": "Technical Services",
+
+      "targets": [
+        "nsis",
+        "msi"
+      ],
+
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": "",
+
+        "webviewInstallMode": {
+          "type": "offlineInstaller",
+          "silent": true
+        },
+
+        "allowDowngrades": false,
+
+        "nsis": {
+          "installMode": "currentUser",
+          "displayLanguageSelector": false,
+          "languages": [
+            "Arabic",
+            "English"
+          ],
+          "startMenuFolder": "المعاونة الفنية"
+        }
       },
-      "allowDowngrades": false,
-      "nsis": {
-        "installMode": "currentUser",
-        "displayLanguageSelector": false,
-        "languages": [
-          "Arabic",
-          "English"
-        ],
-        "startMenuFolder": "المعاونة الفنية"
-      }
+
+      "deb": {
+        "depends": []
+      },
+
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+
+      "resources": [],
+      "externalBin": []
     },
-    "publisher": "Technical Services"
-  },
-  "security": {
-    "csp": null
-  },
-  "updater": {
-    "active": false
-  },
-  "windows": [
-    {
-      "fullscreen": false,
-      "height": 900,
-      "resizable": true,
-      "title": "المعاونة الفنية | Technical Services",
-      "width": 1440,
-      "minWidth": 1024,
-      "minHeight": 700,
-      "center": true,
-      "decorations": true,
-      "transparent": false,
-      "theme": "Dark"
-    }
-  ],
-  "package": {
-    "productName": "المعاونة الفنية",
-    "version": "1.0.0"
+
+    "security": {
+      "csp": null
+    },
+
+    "updater": {
+      "active": false
+    },
+
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 900,
+        "resizable": true,
+        "title": "المعاونة الفنية | Technical Services",
+        "width": 1440,
+        "minWidth": 1024,
+        "minHeight": 700,
+        "center": true,
+        "decorations": true,
+        "transparent": false,
+        "theme": "Dark"
+      }
+    ]
   }
 }
