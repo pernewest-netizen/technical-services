@@ -1,65 +1,160 @@
-name: Build Windows Installer
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:5173",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  "package": {
+    "productName": "المعاونة الفنية",
+    "version": "1.0.0"
+  },
 
-permissions:
-  contents: read
+  "tauri": {
+    "allowlist": {
+      "all": false,
 
-jobs:
-  build-windows:
-    name: Build Technical Services Windows Setup
-    runs-on: windows-latest
+      "fs": {
+        "all": true,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true,
+        "scope": [
+          "$APPLOCALDATA/**",
+          "$DESKTOP/**",
+          "C:/**",
+          "D:/**"
+        ]
+      },
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      "path": {
+        "all": true
+      },
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      "dialog": {
+        "all": true,
+        "open": true,
+        "save": true
+      },
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build Windows Installer
-        run: npm run build:windows:nsis
-        env:
-          RUST_BACKTRACE: "1"
-
-      - name: Prepare installer
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Force -Path "dist-installer" | Out-Null
-
-          $installer = Get-ChildItem `
-            "src-tauri/target/release/bundle/nsis/*.exe" |
-            Select-Object -First 1
-
-          if (-not $installer) {
-            Write-Error "Installer EXE was not found."
-            exit 1
+      "shell": {
+        "all": false,
+        "open": true,
+        "scope": [
+          {
+            "name": "explorer",
+            "cmd": "explorer",
+            "args": true
+          },
+          {
+            "name": "photoshop",
+            "cmd": "photoshop",
+            "args": true
           }
+        ]
+      },
 
-          Copy-Item `
-            $installer.FullName `
-            "dist-installer/Technical-Services-Setup.exe" `
-            -Force
+      "os": {
+        "all": true
+      },
 
-          Write-Host "Installer created:"
-          Write-Host "dist-installer/Technical-Services-Setup.exe"
+      "process": {
+        "relaunch": true
+      }
+    },
 
-      - name: Upload installer
-        uses: actions/upload-artifact@v4
-        with:
-          name: Technical-Services-Setup
-          path: dist-installer/Technical-Services-Setup.exe
-          if-no-files-found: error
-          retention-days: 30
+    "bundle": {
+      "active": true,
+      "category": "Productivity",
+      "copyright": "Technical Services",
+
+      "identifier": "com.technicalservices.app",
+
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.ico"
+      ],
+
+      "longDescription": "Technical Services - Design & Production Management System",
+      "shortDescription": "Technical Services",
+      "publisher": "Technical Services",
+
+      "targets": [
+        "nsis",
+        "msi"
+      ],
+
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": "",
+
+        "webviewInstallMode": {
+          "type": "offlineInstaller",
+          "silent": true
+        },
+
+        "allowDowngrades": false,
+
+        "nsis": {
+          "installMode": "currentUser",
+          "displayLanguageSelector": false,
+          "languages": [
+            "Arabic",
+            "English"
+          ],
+          "startMenuFolder": "المعاونة الفنية"
+        }
+      },
+
+      "deb": {
+        "depends": []
+      },
+
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+
+      "resources": [],
+      "externalBin": []
+    },
+
+    "security": {
+      "csp": null
+    },
+
+    "updater": {
+      "active": false
+    },
+
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 900,
+        "resizable": true,
+        "title": "المعاونة الفنية | Technical Services",
+        "width": 1440,
+        "minWidth": 1024,
+        "minHeight": 700,
+        "center": true,
+        "decorations": true,
+        "transparent": false,
+        "theme": "Dark"
+      }
+    ]
+  }
+}
