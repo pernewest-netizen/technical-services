@@ -11,7 +11,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -22,14 +22,14 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install dependencies
+      - name: Install Node dependencies
         run: npm install
 
-      - name: Build Tauri App
-        run: npm run tauri build
+      - name: Build App with Tauri
+        run: npx tauri build
 
-      - name: Upload Setup File
+      - name: Upload Windows Setup
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-OneClick-Setup
+          name: Windows-OneClick-Installer
           path: src-tauri/target/release/bundle/nsis/*.exe
