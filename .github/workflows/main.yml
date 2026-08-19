@@ -1,4 +1,4 @@
-name: "Build One-Click Windows Installer"
+name: "Build One Click Windows Installer"
 
 on:
   push:
@@ -7,40 +7,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-tauri:
-    permissions:
-      contents: write
+  build:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
-      - name: Install Rust stable
+      - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build Tauri App
-        uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tagName: v__VERSION__
-          releaseName: "App Release v__VERSION__"
-          releaseBody: "Automated One-Click Installer"
-          releaseDraft: false
-          prerelease: false
+        run: npm run tauri build
 
-      - name: Upload Artifact
+      - name: Upload Setup File
         uses: actions/upload-artifact@v4
         with:
-          name: OneClick-Installer
+          name: Windows-OneClick-Setup
           path: src-tauri/target/release/bundle/nsis/*.exe
